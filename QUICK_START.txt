@@ -1,0 +1,221 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║          PIPELINE DE PREPROCESAMIENTO - GUÍA RÁPIDA DE INICIO                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📦 INSTALACIÓN (HACER UNA SOLA VEZ)
+═════════════════════════════════════════════════════════════════════════════
+
+  pip install opencv-python numpy
+
+═════════════════════════════════════════════════════════════════════════════
+
+🚀 FORMA MÁS FÁCIL (RECOMENDADO)
+═════════════════════════════════════════════════════════════════════════════
+
+  python guia_completa.py
+
+  ✓ Menú interactivo
+  ✓ Guía paso a paso
+  ✓ Manejo automático de errores
+
+═════════════════════════════════════════════════════════════════════════════
+
+📝 SI DESEAS HACER PASOS INDIVIDUALES
+═════════════════════════════════════════════════════════════════════════════
+
+PASO 1: Preparar imágenes
+────────────────────────────────────────────────────────────────────────────
+  python 1_preprocesar_imagenes.py
+  
+  Entrada:  imagenes_originales/*.jpg (cualquier tamaño)
+  Salida:   imagenes_procesadas/*_128x128.png (blanco y negro, 128×128)
+
+PASO 2: Convertir a matrices binarias
+────────────────────────────────────────────────────────────────────────────
+  python 2_imagen_a_matriz.py
+  
+  Entrada:  imagenes_procesadas/*.png
+  Salida:   datos_matrices.npz (matrices 128×128 de 1s y 0s)
+
+PASO 3: Ver matrices (OPCIONAL)
+────────────────────────────────────────────────────────────────────────────
+  python 3_visualizar_matrices.py
+  
+  ✓ Ver matrices completas o comprimidas
+  ✓ Ver estadísticas
+  ✓ Generar reporte
+  
+  Símbolos: █ = píxel blanco (1), · = píxel con objeto (0)
+
+PASO 4: Generar dataset final
+────────────────────────────────────────────────────────────────────────────
+  python 4_generar_dataset.py
+  
+  Entrada:  datos_matrices.npz
+  Salida:   dataset_con_etiquetas.npz (vectores + etiquetas)
+           dataset_con_etiquetas.csv (Excel compatible)
+           dataset_info.json (estadísticas)
+
+═════════════════════════════════════════════════════════════════════════════
+
+🧪 PROBAR CON IMÁGENES DE EJEMPLO
+═════════════════════════════════════════════════════════════════════════════
+
+  python generar_imagenes_prueba.py
+  
+  Genera: 5 imágenes limpias + 5 contaminadas
+  
+  Luego ejecuta el pipeline normal:
+  python guia_completa.py
+
+═════════════════════════════════════════════════════════════════════════════
+
+📂 ESTRUCTURA DE CARPETAS
+═════════════════════════════════════════════════════════════════════════════
+
+  proyecto/
+  ├── imagenes_originales/           ← Coloca aquí tus imágenes
+  ├── imagenes_procesadas/           ← Se crea automáticamente
+  │
+  ├── 1_preprocesar_imagenes.py      (Paso 1)
+  ├── 2_imagen_a_matriz.py           (Paso 2)
+  ├── 3_visualizar_matrices.py       (Paso 3 - Opcional)
+  ├── 4_generar_dataset.py           (Paso 4)
+  ├── guia_completa.py               (MENÚ PRINCIPAL)
+  ├── generar_imagenes_prueba.py     (Para testing)
+  ├── README.md                      (Documentación completa)
+  └── QUICK_START.txt                (Este archivo)
+  
+  ARCHIVOS GENERADOS:
+  ├── datos_matrices.npz             (Matrices 128×128)
+  ├── dataset_con_etiquetas.npz      (Dataset para ML)
+  ├── dataset_con_etiquetas.csv      (Excel compatible)
+  ├── dataset_info.json              (Estadísticas)
+  └── etiquetas.json                 (Solo etiquetas)
+
+═════════════════════════════════════════════════════════════════════════════
+
+🔧 PARÁMETROS CLAVE
+═════════════════════════════════════════════════════════════════════════════
+
+  PREPROCESAMIENTO
+  ├── Tamaño final: 128 × 128 píxeles
+  ├── Color: Blanco y Negro (Escala de grises)
+  
+  BINARIZACIÓN
+  ├── Valor 1: Píxel blanco (fondo limpio)
+  ├── Valor 0: Píxel con objeto (grano/arroz)
+  
+  DATASET FINAL
+  ├── Elementos por vector: 16,384 (128 × 128)
+  ├── Etiqueta 1: Hay contaminación presente
+  ├── Etiqueta 0: Sin contaminación
+
+═════════════════════════════════════════════════════════════════════════════
+
+💾 CARGAR DATASET EN PYTHON
+═════════════════════════════════════════════════════════════════════════════
+
+import numpy as np
+
+# Opción 1: Formato NumPy (Recomendado)
+datos = np.load('dataset_con_etiquetas.npz')
+X = datos['vectores']        # (n_imágenes, 16384)
+y = datos['etiquetas']       # (n_imágenes,)
+
+# Opción 2: Formato CSV
+import pandas as pd
+df = pd.read_csv('dataset_con_etiquetas.csv')
+X = df.iloc[:, :-1].values   # Todas menos última columna
+y = df.iloc[:, -1].values    # Última columna
+
+# Ver información
+print(f"Total imágenes: {len(X)}")
+print(f"Con contaminación: {y.sum()}")
+print(f"Sin contaminación: {len(y) - y.sum()}")
+
+═════════════════════════════════════════════════════════════════════════════
+
+⚙️ SOLUCIÓN RÁPIDA DE PROBLEMAS
+═════════════════════════════════════════════════════════════════════════════
+
+PROBLEMA: ModuleNotFoundError: No module named 'cv2'
+SOLUCIÓN: pip install opencv-python
+
+PROBLEMA: No se encuentran imágenes en imagenes_originales
+SOLUCIÓN: Copia tus imágenes (.jpg, .png, etc.) a esa carpeta
+          O ejecuta: python generar_imagenes_prueba.py
+
+PROBLEMA: "No existe datos_matrices.npz"
+SOLUCIÓN: Primero ejecuta el PASO 2 (2_imagen_a_matriz.py)
+
+PROBLEMA: Las matrices se ven vacías o todas blancas
+SOLUCIÓN: Ajusta el umbral en 2_imagen_a_matriz.py
+          Verifica que tus imágenes originales tengan buen contraste
+
+═════════════════════════════════════════════════════════════════════════════
+
+📊 FLUJO GENERAL
+═════════════════════════════════════════════════════════════════════════════
+
+  Imagen Original (JPG, PNG, etc.)
+           ↓
+    [PASO 1] Preprocesamiento
+           ↓
+    Imagen 128×128 Blanco y Negro
+           ↓
+    [PASO 2] Binarización
+           ↓
+    Matriz 128×128 (1s y 0s)
+           ↓
+    [PASO 3 - Opcional] Visualizar
+           ↓
+    [PASO 4] Generar Dataset
+           ↓
+    DATASET FINAL ✅
+    - 16,384 elementos por fila
+    - 1 etiqueta (0 o 1)
+    - CSV, NumPy, JSON
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ CHECKLIST PARA EMPEZAR
+═════════════════════════════════════════════════════════════════════════════
+
+  ☐ Instalaste las dependencias (pip install opencv-python numpy)
+  ☐ Tienes imágenes en la carpeta imagenes_originales/
+  ☐ Ejecutaste: python guia_completa.py O los pasos individualmente
+  ☐ Revisaste que los archivos de salida se generaron
+  ☐ Cargaste el dataset en Python para verificar
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎓 DATOS QUE NECESITA EL PROFESOR
+═════════════════════════════════════════════════════════════════════════════
+
+Para presentación:
+  ✓ dataset_con_etiquetas.npz o .csv (archivo principal)
+  ✓ dataset_info.json (estadísticas)
+  ✓ 2-3 ejemplos de imágenes procesadas
+  ✓ Reporte con matrices (opcional)
+
+═════════════════════════════════════════════════════════════════════════════
+
+📖 DOCUMENTACIÓN COMPLETA
+═════════════════════════════════════════════════════════════════════════════
+
+Lee README.md para:
+  • Descripción detallada de cada script
+  • Ejemplos de código
+  • Personalización avanzada
+  • Preguntas frecuentes
+
+═════════════════════════════════════════════════════════════════════════════
+
+¡LISTO PARA EMPEZAR!
+
+1. Ejecuta:  python guia_completa.py
+2. Selecciona: Opción 1 (Ejecutar todo automáticamente)
+3. ¡Sigue las instrucciones en pantalla!
+
+═════════════════════════════════════════════════════════════════════════════

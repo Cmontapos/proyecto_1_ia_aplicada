@@ -1,0 +1,329 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           ÍNDICE PRINCIPAL                                  ║
+║                   Pipeline de Preprocesamiento de Imágenes                  ║
+║              Para Detección de Contaminación (Arroz/Grano)                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📖 LEER PRIMERO
+═════════════════════════════════════════════════════════════════════════════
+
+1️⃣  QUICK_START.txt
+    └─ Guía rápida (5 minutos)
+    └─ Instalación y primeros pasos
+    └─ Comandos básicos
+
+2️⃣  README.md
+    └─ Documentación completa
+    └─ Descripción detallada de cada script
+    └─ Ejemplos de código
+    └─ FAQ y troubleshooting
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎯 SCRIPTS EJECUTABLES (Correr estos en orden)
+═════════════════════════════════════════════════════════════════════════════
+
+PASO 1:  1_preprocesar_imagenes.py
+         ├─ Entrada: imagenes_originales/*.jpg
+         ├─ Salida: imagenes_procesadas/*_128x128.png
+         └─ Comando: python 1_preprocesar_imagenes.py
+
+PASO 2:  2_imagen_a_matriz.py
+         ├─ Entrada: imagenes_procesadas/*.png
+         ├─ Salida: datos_matrices.npz
+         └─ Comando: python 2_imagen_a_matriz.py
+
+PASO 3:  3_visualizar_matrices.py (OPCIONAL)
+         ├─ Entrada: datos_matrices.npz
+         ├─ Salida: reporte_matrices.txt (si se desea)
+         └─ Comando: python 3_visualizar_matrices.py [--reporte]
+
+PASO 4:  4_generar_dataset.py
+         ├─ Entrada: datos_matrices.npz
+         ├─ Salida: dataset_con_etiquetas.npz, .csv, .json
+         └─ Comando: python 4_generar_dataset.py
+
+BONUS:   generar_imagenes_prueba.py
+         ├─ Genera imágenes de ejemplo para testing
+         └─ Comando: python generar_imagenes_prueba.py
+
+MENÚ:    guia_completa.py  ⭐ RECOMENDADO
+         ├─ Menú interactivo que guía todo el proceso
+         └─ Comando: python guia_completa.py
+
+═════════════════════════════════════════════════════════════════════════════
+
+📚 ARCHIVOS DE DOCUMENTACIÓN
+═════════════════════════════════════════════════════════════════════════════
+
+INDICE_PRINCIPAL.txt (este archivo)
+├─ Breve resumen de todos los recursos
+└─ Guía de navegación
+
+QUICK_START.txt
+├─ Guía de inicio rápido
+├─ Instalación de dependencias
+├─ Solución rápida de problemas
+└─ ⭐ COMIENZA AQUÍ si tienes prisa
+
+README.md
+├─ Documentación completa y detallada
+├─ Explicación de cada script
+├─ Ejemplos de código
+├─ Personalización avanzada
+└─ Preguntas frecuentes
+
+RESUMEN_ARCHIVOS.txt
+├─ Descripción de cada archivo
+├─ Estructura de carpetas
+├─ Formatos de salida
+└─ Flujo de ejecución
+
+EJEMPLOS_OUTPUT.txt
+├─ Ejemplos de visualización en terminal
+├─ Formato del dataset
+├─ Cómo cargar datos en Python
+├─ Ejemplos de uso con Machine Learning
+└─ Preguntas frecuentes
+
+═════════════════════════════════════════════════════════════════════════════
+
+🚀 INICIO RÁPIDO (3 OPCIONES)
+═════════════════════════════════════════════════════════════════════════════
+
+OPCIÓN A: Menú Interactivo (RECOMENDADO - La más fácil)
+──────────────────────────────────────────────────────────────────────────
+$ pip install opencv-python numpy
+$ python guia_completa.py
+→ Sigue las instrucciones en pantalla
+
+OPCIÓN B: Automatización Total
+──────────────────────────────────────────────────────────────────────────
+$ pip install opencv-python numpy
+$ python generar_imagenes_prueba.py      # Genera ejemplos
+$ python 1_preprocesar_imagenes.py
+$ python 2_imagen_a_matriz.py
+$ python 4_generar_dataset.py
+→ Tu dataset estará en dataset_con_etiquetas.npz
+
+OPCIÓN C: Manual (Más Control)
+──────────────────────────────────────────────────────────────────────────
+1. Coloca tus imágenes en: imagenes_originales/
+2. Ejecuta cada script individualmente
+3. Verifica los resultados antes de pasar al siguiente
+
+═════════════════════════════════════════════════════════════════════════════
+
+📊 ARCHIVOS QUE SE GENERAN
+═════════════════════════════════════════════════════════════════════════════
+
+CARPETAS:
+├─ imagenes_originales/         ← Tus imágenes (ENTRADA)
+└─ imagenes_procesadas/         ← Imágenes 128×128 B&N (PASO 1)
+
+ARCHIVOS DE DATOS:
+├─ datos_matrices.npz           ← Matrices binarias (PASO 2)
+├─ dataset_con_etiquetas.npz    ← Dataset final NumPy (PASO 4) ⭐
+├─ dataset_con_etiquetas.csv    ← Dataset final CSV/Excel (PASO 4)
+├─ dataset_info.json            ← Estadísticas (PASO 4)
+├─ etiquetas.json               ← Solo etiquetas (PASO 4)
+└─ reporte_matrices.txt         ← Reporte visual (PASO 3 - Opcional)
+
+═════════════════════════════════════════════════════════════════════════════
+
+⚙️ REQUISITOS
+═════════════════════════════════════════════════════════════════════════════
+
+Python 3.6+
+
+Librerías:
+  pip install opencv-python numpy
+
+Opcional (para abrir CSV en Python):
+  pip install pandas
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎓 PARA ESTUDIANTES: TRABAJO EN GRUPO
+═════════════════════════════════════════════════════════════════════════════
+
+PASO 1: Cada estudiante prepara sus imágenes
+├─ Copia tus imágenes a imagenes_originales/
+└─ Ejecuta: python 1_preprocesar_imagenes.py
+
+PASO 2: Procesa tus imágenes
+└─ Ejecuta: python 2_imagen_a_matriz.py
+
+PASO 3: Comparte tus matrices
+├─ Envía a carpeta compartida: datos_matrices.npz
+└─ O envía: imagenes_procesadas/
+
+PASO 4: Alguien consolida todo
+├─ Copia todos los datos_matrices.npz a una sola carpeta
+├─ Ejecuta: python 4_generar_dataset.py (con todos los datos)
+└─ ¡Dataset compartido listo!
+
+═════════════════════════════════════════════════════════════════════════════
+
+💡 CONSEJOS IMPORTANTE
+═════════════════════════════════════════════════════════════════════════════
+
+✓ Asegura buen CONTRASTE en tus imágenes originales
+  (fondo blanco claro, objetos oscuros distintos)
+
+✓ Usa imágenes de tamaño similar (200×200 píxeles mínimo)
+
+✓ Si algo falla, LEE EL ERROR en la terminal
+
+✓ Verifica cada paso antes de pasar al siguiente
+
+✓ Guarda copias de seguridad de tus imágenes originales
+
+✓ Para Machine Learning, usa el archivo .npz (más eficiente)
+
+═════════════════════════════════════════════════════════════════════════════
+
+❓ PREGUNTAS RÁPIDAS
+═════════════════════════════════════════════════════════════════════════════
+
+P: ¿Por dónde empiezo?
+R: Lee QUICK_START.txt (5 min) → Ejecuta guia_completa.py
+
+P: ¿Debo ejecutar los scripts en orden?
+R: SÍ: Paso 1 → 2 → 4 (3 es opcional)
+
+P: ¿Qué es el archivo dataset_con_etiquetas.npz?
+R: Es tu dataset final, listo para Machine Learning
+
+P: ¿Cómo uso el dataset en Python?
+R: Ver ejemplos en EJEMPLOS_OUTPUT.txt
+
+P: ¿Puedo cambiar el tamaño de 128×128?
+R: Sí, edita los scripts correspondientes
+
+P: ¿Mi dataset está listo para entrenar un modelo?
+R: SÍ, es compatible con scikit-learn, TensorFlow, PyTorch
+
+═════════════════════════════════════════════════════════════════════════════
+
+📈 FORMATO DEL DATASET FINAL
+═════════════════════════════════════════════════════════════════════════════
+
+Cada imagen se convierte en:
+  [píxel_0, píxel_1, ..., píxel_16383, etiqueta]
+   └─────── 16,384 elementos ─────────┘    └─ 0 o 1
+
+Donde:
+  • 0-16383: Matriz 128×128 aplanada (1=blanco, 0=objeto)
+  • Etiqueta: 1 si hay contaminación, 0 si no hay
+
+Compatible con:
+  ✓ Scikit-learn        ✓ XGBoost
+  ✓ TensorFlow/Keras    ✓ LightGBM
+  ✓ PyTorch             ✓ Redes neuronales
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎯 FLUJO VISUAL
+═════════════════════════════════════════════════════════════════════════════
+
+Imagen Original (JPG, PNG, etc.)
+        ↓
+   [PASO 1] → Conversión B&N + Redimensión (128×128)
+        ↓
+    Imagen 128×128
+        ↓
+   [PASO 2] → Binarización (1s y 0s)
+        ↓
+    Matriz 128×128
+        ↓
+   [PASO 3] → Visualizar (opcional)
+        ↓
+   [PASO 4] → Crear Dataset + Etiquetar
+        ↓
+    DATASET FINAL ✅
+    (16,384 elementos + etiqueta)
+
+═════════════════════════════════════════════════════════════════════════════
+
+📋 CHECKLIST ANTES DE EMPEZAR
+═════════════════════════════════════════════════════════════════════════════
+
+☐ Python 3.6+ instalado
+☐ OpenCV instalado: pip install opencv-python
+☐ NumPy instalado: pip install numpy
+☐ Todos estos archivos en la misma carpeta
+☐ Carpeta imagenes_originales/ creada con tus imágenes
+☐ Leíste QUICK_START.txt
+☐ Listo para ejecutar: python guia_completa.py
+
+═════════════════════════════════════════════════════════════════════════════
+
+🆘 SOLUCIÓN RÁPIDA DE PROBLEMAS
+═════════════════════════════════════════════════════════════════════════════
+
+"ModuleNotFoundError: No module named 'cv2'"
+→ pip install opencv-python
+
+"No se encuentran imágenes"
+→ Copia imágenes a imagenes_originales/ o ejecuta generar_imagenes_prueba.py
+
+"No existe datos_matrices.npz"
+→ Primero ejecuta paso 2 (2_imagen_a_matriz.py)
+
+"No existe imagenes_procesadas"
+→ Primero ejecuta paso 1 (1_preprocesar_imagenes.py)
+
+"Matrices vacías o todas blancas"
+→ Verifica que tus imágenes originales tengan buen contraste
+→ O ajusta el umbral en 2_imagen_a_matriz.py
+
+═════════════════════════════════════════════════════════════════════════════
+
+📞 ARCHIVOS A LEER EN ORDEN DE IMPORTANCIA
+═════════════════════════════════════════════════════════════════════════════
+
+1. Este archivo (INDICE_PRINCIPAL.txt) - Estás aquí ✓
+2. QUICK_START.txt - Guía rápida (5 min)
+3. README.md - Documentación completa
+4. RESUMEN_ARCHIVOS.txt - Descripción de archivos
+5. EJEMPLOS_OUTPUT.txt - Ejemplos y casos de uso
+6. Los scripts Python - Léelos si quieres entender cómo funcionan
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎓 PARA PRESENTACIÓN AL PROFESOR
+═════════════════════════════════════════════════════════════════════════════
+
+Entrega estos archivos:
+  ✓ dataset_con_etiquetas.npz     (dataset principal)
+  ✓ dataset_con_etiquetas.csv     (alternativa Excel)
+  ✓ dataset_info.json             (estadísticas)
+  ✓ Todos los scripts Python       (código del procesamiento)
+  ✓ 2-3 ejemplos de imágenes procesadas
+  ✓ README.md o QUICK_START.txt    (documentación)
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎉 ¡LISTO!
+═════════════════════════════════════════════════════════════════════════════
+
+Próximos pasos:
+
+1. Lee QUICK_START.txt (toma 5 minutos)
+
+2. Ejecuta:
+   pip install opencv-python numpy
+   python guia_completa.py
+
+3. Sigue las instrucciones en pantalla
+
+4. Tu dataset estará listo en menos de 10 minutos
+
+═════════════════════════════════════════════════════════════════════════════
+
+Última actualización: Abril 2026
+Todos los scripts son compatibles con Python 3.6+
+Funciona en Windows, Mac y Linux
+
+═════════════════════════════════════════════════════════════════════════════

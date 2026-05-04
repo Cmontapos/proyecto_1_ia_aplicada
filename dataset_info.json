@@ -1,0 +1,9 @@
+{
+  "numero_im\u00e1genes": 30,
+  "tama\u00f1o_cada_vector": 16384,
+  "total_etiquetas": 15,
+  "clases": {
+    "sin_contaminacion": 15,
+    "con_contaminacion": 15
+  }
+}
