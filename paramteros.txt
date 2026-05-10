@@ -1,0 +1,5 @@
+Parámetros actuales:
+  Tipo contraste: histogram
+  CLAHE Clip: 4.0
+  Gamma: 2.0
+  Morph: 7

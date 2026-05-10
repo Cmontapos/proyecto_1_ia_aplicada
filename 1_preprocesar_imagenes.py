@@ -8,6 +8,7 @@ Script MEJORADO: Ajusta 1 imagen → Aplica a Todas
 import cv2
 import numpy as np
 import os
+import random   
 from pathlib import Path
 
 
@@ -159,8 +160,9 @@ def menu_ajustes():
                 print("❌ Valor inválido")
         
         elif opcion == '5':
-            primera_imagen = list(Path("originales").glob("*.[jp][pn]g"))[0]
-            mostrar_preview(str(primera_imagen), tipo_contraste, clahe_clip, gamma, morph)
+            foto = list(Path("originales").glob("*.[jp][pn]g"))
+            imagen_ejemplo = random.choice(foto)
+            mostrar_preview(str(imagen_ejemplo), tipo_contraste, clahe_clip, gamma, morph)
         
         elif opcion == '6':
             return tipo_contraste, clahe_clip, gamma, morph
