@@ -102,7 +102,7 @@ def cargar_y_visualizar():
     """
     Carga las matrices del archivo .npz y permite visualizarlas interactivamente
     """
-    archivo = "datos_matrices.npz"
+    archivo = "src/datos_matrices.npz"
     
     if not os.path.exists(archivo):
         print(f"Error: No se encontró el archivo '{archivo}'")
@@ -179,11 +179,11 @@ def cargar_y_visualizar():
             print("Opción no válida")
 
 
-def generar_reporte_txt(archivo_salida="reporte_matrices.txt"):
+def generar_reporte_txt(archivo_salida="src/reporte_matrices.txt"):
     """
     Genera un archivo de texto con todas las matrices
     """
-    archivo = "datos_matrices.npz"
+    archivo = "src/datos_matrices.npz"
     
     if not os.path.exists(archivo):
         print(f"Error: No se encontró '{archivo}'")

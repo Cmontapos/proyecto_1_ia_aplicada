@@ -12,7 +12,7 @@ import csv
 from pathlib import Path
 
 
-def cargar_matrices(archivo="datos_matrices.npz"):
+def cargar_matrices(archivo="src/datos_matrices.npz"):
     """
     Carga las matrices guardadas
     """
@@ -77,12 +77,12 @@ def guardar_dataset(vectores, etiquetas, prefijo="dataset"):
     print("="*70)
     
     # 1. NumPy comprimido (.npz)
-    archivo_npz = f"{prefijo}_con_etiquetas.npz"
+    archivo_npz = f"src/{prefijo}_con_etiquetas.npz"
     np.savez_compressed(archivo_npz, vectores=vectores, etiquetas=etiquetas)
     print(f"✓ Guardado: {archivo_npz}")
     
     # 2. CSV (para compatibilidad con Excel, Pandas, etc.)
-    archivo_csv = f"{prefijo}_con_etiquetas.csv"
+    archivo_csv = f"src/{prefijo}_con_etiquetas.csv"
     with open(archivo_csv, 'w', newline='') as f:
         writer = csv.writer(f)
         # Encabezado con nombres de columnas
@@ -120,7 +120,7 @@ def guardar_dataset(vectores, etiquetas, prefijo="dataset"):
     print("="*70 + "\n")
 
 
-def cargar_dataset(archivo="dataset_con_etiquetas.npz"):
+def cargar_dataset(archivo="src/dataset_con_etiquetas.npz"):
     """
     Carga un dataset guardado previamente
     """
@@ -159,7 +159,7 @@ def crear_archivo_etiquetas_interactivo():
     """
     Crea un archivo JSON con las etiquetas de forma interactiva
     """
-    archivo_matrices = "datos_matrices.npz"
+    archivo_matrices = "src/datos_matrices.npz"
     
     if not os.path.exists(archivo_matrices):
         print(f"Error: No se encontró '{archivo_matrices}'")
@@ -183,7 +183,7 @@ def crear_archivo_etiquetas_interactivo():
         print()
     
     # Guardar etiquetas
-    archivo_etiquetas = "etiquetas.json"
+    archivo_etiquetas = "src/etiquetas.json"
     with open(archivo_etiquetas, 'w') as f:
         json.dump(etiquetas, f, indent=2)
     

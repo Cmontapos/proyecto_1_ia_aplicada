@@ -123,7 +123,7 @@ def cargar_matrices(ruta_archivo):
 if __name__ == "__main__":
     # CONFIGURAR ESTAS RUTAS
     carpeta_entrada = "procesadas"  # Carpeta con imágenes 128x128
-    archivo_salida = "datos_matrices.npz"    # Archivo para guardar matrices
+    archivo_salida = "src/datos_matrices.npz"    # Archivo para guardar matrices
     
     print("Ubicaciones:")
     print(f"- Entrada: {carpeta_entrada}")
