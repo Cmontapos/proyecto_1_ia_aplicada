@@ -11,7 +11,7 @@ help:
 
 clean-processed:
 	@echo "Borrando imagenes procesadas..."
-	rm -rf src/imagenes_procesadas/
+	rm -rf procesadas/*
 	@echo "✓ Hecho"
 
 clean-matrices:
