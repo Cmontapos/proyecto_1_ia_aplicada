@@ -6,3 +6,5 @@ procesadas/*
 originales/*
 !originales/.gitkeep
 dataset_info.json
+modelos/*.pkl
+modelos/resultados
