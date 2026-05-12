@@ -1,0 +1,10 @@
+src/*
+!src/.gitkeep
+preview.png
+procesadas/*
+!procesadas/.gitkeep
+originales/*
+!originales/.gitkeep
+dataset_info.json
+modelos/*
+!modelos/.gitkeep
