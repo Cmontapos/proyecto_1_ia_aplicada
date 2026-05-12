@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 import json
 
-def imagen_a_matriz(ruta_imagen, umbral=145):
+def imagen_a_matriz(ruta_imagen, umbral=130):
     """
     Convierte una imagen en escala de grises a una matriz binaria
     

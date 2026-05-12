@@ -3,7 +3,9 @@ src/*
 preview.png
 procesadas/*
 !procesadas/.gitkeep
-originales/*
+originales/*.jpg
+originales/*.jpeg
+originales/*.png
 !originales/.gitkeep
 dataset_info.json
 modelos/*.pkl
