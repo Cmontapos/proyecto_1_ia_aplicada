@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix, classification_report
-import pickle
+import joblib
 import os
 
 def entrenar_arbol():
@@ -60,9 +60,8 @@ def entrenar_arbol():
     
     # Guardar modelo
     os.makedirs('modelos', exist_ok=True)
-    with open('modelos/arbol_decision.pkl', 'wb') as f:
-        pickle.dump(modelo, f)
-    print("\n✓ Modelo guardado: modelos/arbol_decision.pkl")
+    joblib.dump(modelo, 'modelos/arbol_decision.joblib')    
+    print("\n✓ Modelo guardado")
     
     return {
         'modelo': 'Árbol de Decisión',

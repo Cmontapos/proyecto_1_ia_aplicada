@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix, classification_report
-import pickle
+import joblib
 import os
 
 def entrenar_svm():
@@ -78,9 +78,8 @@ def entrenar_svm():
     
     # Guardar modelo
     os.makedirs('modelos', exist_ok=True)
-    with open('modelos/svm.pkl', 'wb') as f:
-        pickle.dump(modelo, f)
-    print("\n✓ Modelo guardado: modelos/svm.pkl")
+    joblib.dump(modelo, 'modelos/svm.joblib')
+    print("\n✓ Modelo guardado")
     
     return {
         'modelo': 'SVM',

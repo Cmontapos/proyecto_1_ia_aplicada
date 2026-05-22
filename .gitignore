@@ -8,5 +8,5 @@ originales/*.jpeg
 originales/*.png
 !originales/.gitkeep
 dataset_info.json
-modelos/*.pkl
+modelos/*.joblib
 modelos/resultados

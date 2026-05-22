@@ -3,7 +3,7 @@ comparar_modelos.py - Compara todos los modelos entrenados
 """
 
 import numpy as np
-import pickle
+import joblib
 import os
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score
@@ -23,8 +23,7 @@ def cargar_dataset():
 def cargar_modelo(ruta):
     """Carga un modelo guardado"""
     try:
-        with open(ruta, 'rb') as f:
-            return pickle.load(f)
+        return joblib.load(ruta)
     except:
         return None
 
@@ -55,10 +54,10 @@ def comparar_modelos():
     
     # Cargar modelos
     modelos = {
-        'Árbol de Decisión': 'modelos/arbol_decision.pkl',
-        'Naive Bayes': 'modelos/naive_bayes.pkl',
-        'KNN': 'modelos/knn.pkl',
-        'SVM': 'modelos/svm.pkl'
+        'Árbol de Decisión': 'modelos/arbol_decision.joblib',
+        'Naive Bayes': 'modelos/naive_bayes.joblib',
+        'KNN': 'modelos/knn.joblib',
+        'SVM': 'modelos/svm.joblib'
     }
     
     resultados = []
@@ -73,7 +72,7 @@ def comparar_modelos():
         modelo = cargar_modelo(ruta)
         
         if modelo is None:
-            print("❌ Error al cargar")
+            print("Error al cargar")
             continue
         
         resultado_eval = evaluar_modelo(modelo, X_test, y_test, nombre)
@@ -83,7 +82,7 @@ def comparar_modelos():
             print("✓")
     
     if not resultados:
-        print("\n❌ No hay modelos entrenados")
+        print("\nNo hay modelos entrenados")
         print("Ejecuta primero:")
         print("  python modelos/1_arbol_decision.py")
         print("  python modelos/2_naive_bayes.py")
@@ -103,7 +102,7 @@ def comparar_modelos():
     # Mejor modelo
     mejor = df.iloc[0]
     print("\n" + "="*70)
-    print("🏆 MEJOR MODELO")
+    print("MEJOR MODELO")
     print("="*70)
     print(f"Modelo: {mejor['Modelo']}")
     print(f"Accuracy:  {mejor['Accuracy']:.4f}")

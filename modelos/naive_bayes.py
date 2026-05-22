@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix, classification_report
-import pickle
+import joblib
 import os
 
 def entrenar_naive_bayes():
@@ -60,9 +60,8 @@ def entrenar_naive_bayes():
     
     # Guardar modelo
     os.makedirs('modelos', exist_ok=True)
-    with open('modelos/naive_bayes.pkl', 'wb') as f:
-        pickle.dump(modelo, f)
-    print("\n✓ Modelo guardado: modelos/naive_bayes.pkl")
+    joblib.dump(modelo, 'modelos/naive_bayes.joblib')
+    print("\n✓ Modelo guardado")
     
     return {
         'modelo': 'Naive Bayes',
